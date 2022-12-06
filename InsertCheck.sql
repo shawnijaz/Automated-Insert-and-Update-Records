@@ -55,7 +55,8 @@ BEGIN
 		WHERE totlabel = @totlabel
 	)
 	PRINT('This totlabel already exists')
-END
+END;
+
 ELSE
 BEGIN
 	INSERT INTO EndlessAisle.dbo.authentication (LicKey, BPCode, ShowNew, ContactName, ContactEmail, HostName, StartDate, EndDate, Active, pricelist, ComputerSN, hidepricing, Region)
