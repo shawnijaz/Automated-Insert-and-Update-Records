@@ -7,13 +7,13 @@ IF exists
 (
 	SELECT * 
 	FROM EndlessAisle.dbo.authentication A
-	inner join vc_components B
-	on A.ComputerSN = B.compSerial
+	INNER JOIN vc_components B
+	ON A.ComputerSN = B.compSerial
 	WHERE A.LicKey = @LicKey
-	or A.HostName = @HostName 
-	or A.ComputerSN = @ComputerSN
-	or B.compSerial = @compSerial
-	or B.totlabel = @totlabel
+	OR A.HostName = @HostName 
+	OR A.ComputerSN = @ComputerSN
+	OR B.compSerial = @compSerial
+	OR B.totlabel = @totlabel
 )
 BEGIN
 	IF exists
@@ -62,7 +62,7 @@ BEGIN
 	VALUES (@LicKey, 0, 1, 'name', 'email', @HostName, GETDATE(), '2999-12-31', 'Y', 3, @ComputerSN, 0, 'US')
 
 	INSERT INTO EndlessAisle.dbo.vc_custbrands (idAuth, BrandID, BrandOrder, pricelist)
-	VALUES ((SELECT max(idAuth) FROM EndlessAisle.dbo.authentication), 1000, 1, 3)
+	VALUES ((SELECT MAX(idAuth) FROM EndlessAisle.dbo.authentication), 1000, 1, 3)
 
 	INSERT INTO EndlessAisle.dbo.vc_components
 	VALUES ('ECM', @compSerial, @totlabel)
